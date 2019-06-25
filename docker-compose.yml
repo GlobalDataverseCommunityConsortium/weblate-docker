@@ -1,0 +1,30 @@
+version: '3'
+services:
+  weblate:
+    image: weblate/weblate
+    privileged: true
+    ports:
+      - 80:80
+    volumes:
+      - ./weblate-data:/app/data
+    env_file:
+      - ./environment
+    restart: always
+    depends_on:
+      - database
+      - cache
+  database:
+    image: postgres:9.6-alpine
+    privileged: true
+    env_file:
+      - ./environment
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    restart: always
+  cache:
+    image: redis:4-alpine
+    privileged: true
+    restart: always
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - ./redis-data:/data
