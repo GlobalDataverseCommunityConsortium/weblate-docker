@@ -36,6 +36,12 @@ https://docs.weblate.org/en/latest/admin/deployments.html#docker
 
 4. For more detailed instructions visit https://docs.weblate.org/en/latest/admin/deployments.html#docker
 
+## Volumes
+
+        ./weblate-data for application data
+        ./postgres-data for database
+        ./redis-data for cache
+
 ## Rebuilding the weblate docker image
 
 The `docker-compose` files can be found in https://github.com/WeblateOrg/docker-compose.
