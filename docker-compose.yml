@@ -4,7 +4,7 @@ services:
     image: weblate/weblate
     privileged: true
     ports:
-      - 80:80
+      - 8085:80
     volumes:
       - ./weblate-data:/app/data
     env_file:
@@ -21,6 +21,17 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
     restart: always
+  apache:
+    image: httpd
+    privileged: true
+    labels:
+      - convox.port.443.protocol=tls
+    ports:
+      - 80:80
+      - 443:80
+    volumes:
+      - ./apachecerts:/etc/ssl/certs
+      - ./apacheconfig:/tmp
   cache:
     image: redis:4-alpine
     privileged: true
