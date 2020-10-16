@@ -1,10 +1,10 @@
 version: '3'
 services:
   weblate:
-    image: weblate/weblate
+    image: weblate/weblate:4.2.2-3
     privileged: true
     ports:
-      - 80:80
+      - 8088:8080
     volumes:
       - ./weblate-data:/app/data
     env_file:
@@ -16,6 +16,8 @@ services:
   database:
     image: postgres:9.6-alpine
     privileged: true
+    ports:
+      - 5431:5432
     env_file:
       - ./environment
     volumes:
